@@ -1,13 +1,13 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+const galleryContainer = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
+
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
-
-const galleryContainer = document.querySelector('.gallery');
-const loader = document.querySelector('.loader');
 
 export function createGallery(images) {
   const markup = images
@@ -20,25 +20,23 @@ export function createGallery(images) {
         views,
         comments,
         downloads,
-      }) => {
-        return `
+      }) => `
       <li class="gallery-item">
         <a class="gallery-link" href="${largeImageURL}">
           <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
         </a>
         <div class="info">
-          <p><b>Likes:</b> ${likes}</p>
-          <p><b>Views:</b> ${views}</p>
-          <p><b>Comments:</b> ${comments}</p>
-          <p><b>Downloads:</b> ${downloads}</p>
+          <div class="info-item"><b>Likes</b><span>${likes}</span></div>
+          <div class="info-item"><b>Views</b><span>${views}</span></div>
+          <div class="info-item"><b>Comments</b><span>${comments}</span></div>
+          <div class="info-item"><b>Downloads</b><span>${downloads}</span></div>
         </div>
       </li>
-    `;
-      }
+    `
     )
     .join('');
 
-  galleryContainer.insertAdjacentHTML('beforeend', markup);
+  galleryContainer.innerHTML = markup;
   lightbox.refresh();
 }
 

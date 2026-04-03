@@ -1,5 +1,6 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+
 import { getImagesByQuery } from './js/pixabay-api.js';
 import {
   createGallery,
@@ -15,7 +16,7 @@ form.addEventListener('submit', event => {
 
   const query = event.currentTarget.elements['search-text'].value.trim();
 
-  if (query === '') {
+  if (!query) {
     iziToast.warning({ message: 'Please enter a search query!' });
     return;
   }

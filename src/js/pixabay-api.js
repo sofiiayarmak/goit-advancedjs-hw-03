@@ -14,11 +14,9 @@ export function getImagesByQuery(query) {
 
   return axios
     .get(BASE_URL, { params })
-    .then(response => {
-      return response.data;
-    })
+    .then(response => response.data)
     .catch(error => {
-      console.error('Error fetching images:', error);
+      console.error('API Error:', error);
       throw error;
     });
 }
